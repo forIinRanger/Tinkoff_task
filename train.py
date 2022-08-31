@@ -17,7 +17,5 @@ if args.input_dir != 'stdin':
     for name in os.listdir(f'{dir_with_texts}'):
         with open(fr'{dir_with_texts}\{name}', 'r') as f:
             data.append(f.read())
-    print(data)
 else:
     text_for_train = [i.rstrip('\n') for i in sys.stdin.readlines()]
-    print(text_for_train)

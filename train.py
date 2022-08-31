@@ -10,12 +10,11 @@ parser.add_argument('--model', type=str)
 args = parser.parse_args()
 
 file_to_save_model = args.model
-
+data = []
 if args.input_dir != 'stdin':
     dir_with_texts = args.input_dir
-    data = []
     for name in os.listdir(f'{dir_with_texts}'):
         with open(fr'{dir_with_texts}\{name}', 'r') as f:
             data.append(f.read())
 else:
-    text_for_train = [i.rstrip('\n') for i in sys.stdin.readlines()]
+    data = [i for i in sys.stdin.readlines()]

@@ -1,6 +1,7 @@
 import argparse as ap
 import sys
 import os.path
+import re
 
 # cd C:\Users\Пользователь\PycharmProjects\Tinkoff
 # считываем передаваемые аргументы из командной строки и переносим их в нашу программу
@@ -10,11 +11,15 @@ parser.add_argument('--model', type=str)
 args = parser.parse_args()
 
 file_to_save_model = args.model
-data = []
+texts = []
 if args.input_dir != 'stdin':
     dir_with_texts = args.input_dir
     for name in os.listdir(f'{dir_with_texts}'):
         with open(fr'{dir_with_texts}\{name}', 'r') as f:
-            data.append(f.read())
+            texts.append(f.read())
 else:
-    data = [i for i in sys.stdin.readlines()]
+    texts = [i for i in sys.stdin.readlines()]
+for i in texts:
+    sorte = [x.lower() for x in re.findall(r'[а-яА-ЯёЁ]{0,}', i) if x]
+    print(sorte)
+

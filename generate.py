@@ -30,7 +30,8 @@ class Model:
         for i in range(len(self.res)):
             if '.' in self.res[i - 1]:
                 self.res[i] = self.res[i].capitalize()
-        return ' '.join(self.res)
+        self.res[-1] = re.search(r'[а-яА-ЯёЁ]+', self.res[-1])[0]
+        return ' '.join(self.res)+'.'
 
 
 parser = ap.ArgumentParser()

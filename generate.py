@@ -41,7 +41,6 @@ args = parser.parse_args()
 
 file_to_save_model = args.model
 
-
 with open(f'{file_to_save_model}', 'rb') as f:
     model = pickle.load(f)
 

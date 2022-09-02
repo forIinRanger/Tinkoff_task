@@ -63,4 +63,3 @@ model.fit(sorte)
 print(model.vocabulary)
 with open(f'{file_to_save_model}', 'wb') as f:
     pickle.dump(model, f)
-

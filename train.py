@@ -28,7 +28,7 @@ for i in texts:
     sorte += [x.lower() for x in re.findall(r'[а-яА-ЯёЁ]+', i)]
 
 
-class Model1:
+class Model:
     def __init__(self):
         self.vocabulary = {}
         self.res = []
@@ -36,25 +36,27 @@ class Model1:
     def fit(self, words):
         for i in range(len(words) - 1):
             try:
-                self.vocabulary[words[i]] += words[i + 1]
+                self.vocabulary[words[i]].append(words[i + 1])
             except KeyError:
-                self.vocabulary[words[i]] = words[i + 1]
+                self.vocabulary[words[i]] = [words[i + 1]]
 
     def generate(self, prefix, length: int):
         if not prefix:
             prefix = np.random.choice([i for i in self.vocabulary.keys()])
-        for i in range(length):
+        self.res.append(prefix)
+        for i in range(length - 1):
             try:
                 next_word = np.random.choice([i for i in self.vocabulary[prefix]])
             except KeyError:
                 next_word = np.random.choice([i for i in self.vocabulary.keys()])
             prefix = next_word
-            self.res += next_word
-        return ''.join(self.res)
+            self.res.append(next_word)
+        return ' '.join(self.res)
 
 
-model = Model1()
+model = Model()
 model.fit(sorte)
+print(model.vocabulary)
 with open(f'{file_to_save_model}', 'wb') as f:
     pickle.dump(model, f)
 

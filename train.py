@@ -27,7 +27,6 @@ sorte = []
 for i in texts:
     sorte += [x.lower() for x in re.findall(r'[а-яА-ЯёЁ]+', i)]
 
-
 class Model:
     def __init__(self):
         self.vocabulary = {}
@@ -56,7 +55,6 @@ class Model:
 
 model = Model()
 model.fit(sorte)
-print(model.vocabulary)
 with open(f'{file_to_save_model}', 'wb') as f:
     pickle.dump(model, f)
 

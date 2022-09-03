@@ -25,7 +25,7 @@ else:
 
 sorte = []
 for i in texts:
-    sorte += [x.replace('"', '').lower() for x in re.findall(r'[а-яА-ЯёЁ]+[, -.:;!?]*', i)]
+    sorte += [x.replace('"', '').replace('-', '').lower() for x in re.findall(r'[а-яА-ЯёЁ]+[, -.:;!?]*', i)]
 
 
 class Model:

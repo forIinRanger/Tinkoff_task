@@ -52,7 +52,7 @@ class Model:
             prefix = re.search(r'[а-яА-ЯёЁ]+', next_word)[0]
             self.res.append(next_word)
         for i in range(len(self.res)):
-            if '.' in self.res[i - 1]:
+            if '.' in self.res[i - 1] or '?' in self.res[i - 1] or '!' in self.res[i - 1]:
                 self.res[i] = self.res[i].capitalize()
         self.res[-1] = re.search(r'[а-яА-ЯёЁ]+', self.res[-1])[0]
         return ' '.join(self.res)+'.'
